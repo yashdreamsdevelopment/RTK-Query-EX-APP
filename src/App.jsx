@@ -44,7 +44,7 @@ function App() {
           <Route path="/posts">
             <Route index element={<Posts />} />
             <Route path=":id/comments" element={<Comments />} />
-            <Route path="?userId=4" element={<Temp />} />
+            {/* <Route path="?userId=4" element={<Temp />} /> */}
           </Route>
         </Route>
       </Routes>

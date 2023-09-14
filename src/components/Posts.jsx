@@ -1,13 +1,29 @@
 import React from "react";
-import { useGetAllPostsQuery } from "../services/api/jsonFakeAPI";
+import {
+  useGetAllPostsQuery,
+  useGetPostsOfUserQuery,
+} from "../services/api/jsonFakeAPI";
 import PostCard from "./PostCard";
 import { useSearchParams } from "react-router-dom";
 
 const Posts = () => {
   const [searchParams] = useSearchParams();
-  console.log(searchParams.get("userId"));
-  const { data, isFetching, isLoading, isSuccess, error } =
-    useGetAllPostsQuery();
+  const userId = searchParams.get("userId");
+
+  let data, isFetching, isLoading, isSuccess, error;
+  let response;
+
+  if (userId) {
+    response = useGetPostsOfUserQuery(userId);
+  } else {
+    response = useGetAllPostsQuery();
+  }
+
+  data = response.data;
+  isFetching = response.isFetching;
+  isLoading = response.isFetching;
+  isSuccess = response.isSuccess;
+  error = response.error;
 
   return (
     <div>
